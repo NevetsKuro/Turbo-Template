@@ -1,0 +1,16 @@
+name: "Run Web [Next JS]"
+on:
+  push:
+    paths:
+    - 'apps/docs/**'
+console:
+    name: test actions
+    timeout-minutes: 8
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Check out code
+        uses: echo "Actions is working A-Okay for DOCS!!"
