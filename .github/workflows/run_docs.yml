@@ -1,4 +1,4 @@
-name: "Run Web [Next JS]"
+name: "Run Docs Actions [Next JS]"
 on:
   push:
     paths:
