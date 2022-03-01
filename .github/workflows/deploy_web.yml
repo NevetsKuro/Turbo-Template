@@ -38,4 +38,3 @@ jobs:
           PRODUCTION: false
           ALIAS_DOMAINS: |
             {BRANCH}.turbo-web.vercel.app
-          PR_PREVIEW_DOMAIN: "{REPO}-{PR}.now.sh"
