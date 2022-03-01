@@ -3,6 +3,8 @@ on:
   push:
     paths:
     - 'apps/web/**'
+    pull_request:
+      types: [opened, synchronize]
 jobs:
   console-linux:
     name: Console Linux
