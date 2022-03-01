@@ -1,0 +1,3 @@
+- Github actions for executing independent workflow for each projects
+- Workflow trigger only affects projects
+- Workflow -> Build, lint, deploy 
