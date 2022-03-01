@@ -3,7 +3,8 @@ on:
   push:
     paths:
     - 'apps/docs/**'
-console:
+jobs:
+  console:
     name: test actions
     timeout-minutes: 8
     runs-on: ${{ matrix.os }}
