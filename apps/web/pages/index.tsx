@@ -6,6 +6,7 @@ export default function Web() {
     {/* Trigger GA - flip value: true */}
       <h1>Click to do nothing!</h1>
       <Button />
+      <Button />
     </div>
   );
 }
