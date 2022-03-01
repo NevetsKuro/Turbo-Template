@@ -13,5 +13,6 @@ jobs:
         os: [ubuntu-latest, macos-latest]
 
     steps:
-      - name: Check out code
-        uses: echo "Actions is working A-Okay for DOCS!!"
+      - name: Run echo command
+        shell: bash
+        run: echo "Actions is working A-Okay for DOCS!!"
