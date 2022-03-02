@@ -1,11 +1,10 @@
-name: Deploy Web
+name: Deploy Docs
 on:
   push:
-    branches: [main]
     paths:
     - 'apps/docs/**'
-  pull_request:
-    types: [opened, synchronize]
+    pull_request:
+      types: [opened, synchronize]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +20,7 @@ jobs:
       - name: Run build
         run: echo "Lint Executed!"
 
-  deploy_web:
+  deploy_docs:
     needs: [build, lint]
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"

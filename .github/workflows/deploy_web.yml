@@ -1,11 +1,10 @@
 name: Deploy Web
 on:
   push:
-    branches: [main]
     paths:
-    - 'apps/docs/**'
-  pull_request:
-    types: [opened, synchronize]
+    - 'apps/web/**'
+    pull_request:
+      types: [opened, synchronize]
 jobs:
   build:
     runs-on: ubuntu-latest
