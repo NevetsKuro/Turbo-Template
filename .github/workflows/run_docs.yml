@@ -1,4 +1,4 @@
-name: "Run Docs Actions [Next JS]"
+name: "Run Apps - Docs"
 on:
   push:
     paths:
@@ -12,20 +12,20 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - name: Run echo command
         shell: bash
         run: echo "Actions is working A-Okay for DOCS!!"
 
-  console-windows:
-    name: Console Windows
-    timeout-minutes: 8
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-    steps:
-      - name: Run echo command
-        shell: bash
-        run: echo "Actions is working A-Okay for DOCS!!"
+  # console-windows:
+  #   name: Console Windows
+  #   timeout-minutes: 8
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: []
+  #   steps:
+  #     - name: Run echo command
+  #       shell: bash
+  #       run: echo "Actions is working A-Okay for DOCS!!"
