@@ -5,7 +5,7 @@ export const Button = () => {
   return (
     <div>
       <button onClick={() => {setCount(count+1);setMsg("Don't click me!!")}}>Be-Boop-Bump </button>
-      <h1>{msg} x{count}</h1>
+      {count && <h1>{msg} x{count}</h1>}
     </div>
   );
 };

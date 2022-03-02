@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "drip-projects"
+  },
+  "targets": {
+    "drip-projects": {
+      "hosting": {
+        "turbo-web": [
+          "drip-turbo-template"
+        ],
+        "turbo-docs": [
+          "drip-turbo-docs"
+        ]
+      }
+    }
   }
 }
