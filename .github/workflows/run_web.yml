@@ -9,10 +9,10 @@ on:
     workflows: [Run UI Packages]
     types:
       - completed
-  workflow_call:
-    inputs:
-      username:
-        type: string
+  # workflow_call:
+  #   inputs:
+  #     username:
+  #       type: string
 jobs:
   console-linux:
     name: Console Linux
