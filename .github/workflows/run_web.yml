@@ -9,10 +9,6 @@ on:
     workflows: [Run UI Packages]
     types:
       - completed
-  # workflow_call:
-  #   inputs:
-  #     username:
-  #       type: string
 jobs:
   console-linux:
     name: Console Linux
@@ -24,7 +20,14 @@ jobs:
     steps:
       - name: Run echo command
         shell: bash
-        run: echo "Actions is working A-Okay for WEB!!"
+        run: echo "Started to deploy WEB!!"
+      - uses: actions/checkout@v2
+      - run: yarn turbo run build --scope="web"
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
+          projectId: drip-projects
 
   # console-windows:
   #   name: Console Windows

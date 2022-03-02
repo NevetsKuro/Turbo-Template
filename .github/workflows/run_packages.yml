@@ -18,4 +18,3 @@ jobs:
       - name: Run echo command
         shell: bash
         run: echo "Actions is working A-Okay for PACKAGES/UI!!"
-      # - uses: ./.github/workflows/run_web
