@@ -5,6 +5,10 @@ on:
     - 'apps/web/**'
     pull_request:
       types: [opened, synchronize]
+  workflow_run:
+    workflows: [Run UI Packages]
+    types:
+      - completed
 jobs:
   console-linux:
     name: Console Linux

@@ -1,14 +1,10 @@
-name: "Run Packages Actions"
+name: "Run UI Packages"
 on:
   push:
     paths:
     - 'packages/ui/**'
     pull_request:
       types: [opened, synchronize]
-  workflow_run:
-    workflows: [Run Apps - Docs]
-    types:
-      - completed
 jobs:
   console-linux:
     name: Console Linux
