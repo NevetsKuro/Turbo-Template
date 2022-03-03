@@ -72,16 +72,20 @@ jobs:
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
       
-      - name: Comment
-        uses: peter-evans/create-or-update-comment@v1
+      - uses: actions/github-script@v6
         with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            Docs App is been uploaded to Firebase :fire:
-            - Ready to test :sparkles:
-            - Firebase pushed to url: ${{steps.firebase_docs.outputs.details_url}}"
-          reactions: hooray
-
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              Docs App is been uploaded to Firebase :fire:
+                - Ready to test :sparkles:
+                - Firebase pushed to url: ${{steps.firebase_docs.outputs.details_url}}
+                `
+            }) 
+            
   console-build-web:
     name: Running Web app
     needs: console-ui-packages
