@@ -73,11 +73,14 @@ jobs:
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
       
       - name: Comment
-        if: steps.find-last-comment.outputs.comment-id == ''
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{github.event.pull_request.number}}
-          body: "Firebase pushed to url: ${{steps.firebase_docs.outputs.details_url}}"
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Docs App is been uploaded to Firebase :fire:
+            - Ready to test :sparkles:
+            - Firebase pushed to url: ${{steps.firebase_docs.outputs.details_url}}"
+          reactions: hooray
 
   console-build-web:
     name: Running Web app
