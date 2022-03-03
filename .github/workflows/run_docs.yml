@@ -5,10 +5,11 @@ on:
     - 'apps/docs/**'
     pull_request:
       types: [opened, synchronize]
-  # workflow_run:
-  #   workflows: [Run UI Packages]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: [Run UI Packages]
+    types:
+      - completed
+
 jobs:
   console-linux:
     name: Console Linux
@@ -22,6 +23,10 @@ jobs:
         shell: bash
         run: echo "Actions is working A-Okay for DOCS!!"
 
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
@@ -31,12 +36,12 @@ jobs:
 
       - name: Checkout branch
         run: |
-          git checkout ${GITHUB_REF##*/}
-          echo "${{ github.event.pull_request.head.ref }}"
+          git status
+          echo "${{ github.event.pull_request }}"
           echo "${{ github.ref }}"
 
       - name: Install dependencies
-        run: cd apps/web && yarn
+        run: cd apps/docs && yarn
 
       - run: yarn turbo run build --scope="docs"
 
@@ -48,6 +53,7 @@ jobs:
           target: turbo-docs
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+
   # console-windows:
   #   name: Console Windows
   #   timeout-minutes: 8

@@ -5,16 +5,11 @@ on:
     - 'apps/web/**'
     pull_request:
       types: [opened, synchronize]
-  workflow_call:
-    input:
-      gref: 
-        type: string
-        required: true
-        description: Git ref
-  # workflow_run:
-  #   workflows: [Run UI Packages]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: [Run UI Packages]
+    types:
+      - completed
+
 jobs:
   console-linux:
     name: Console Linux
@@ -41,8 +36,7 @@ jobs:
           node-version: 14
 
       - name: Check branch
-        run: |
-          git status
+        run: git status
 
       - name: Install dependencies
         run: cd apps/web && yarn
