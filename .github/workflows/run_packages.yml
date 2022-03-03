@@ -72,9 +72,10 @@ jobs:
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
       
-      - name: Comment URL
-        uses: actions/github-script@v4
+      
+      - uses: actions/github-script@v3
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
@@ -82,6 +83,7 @@ jobs:
               repo: context.repo.repo,
               body: 'Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}',
             });  
+          
 
   console-build-web:
     name: Running Web app
