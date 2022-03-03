@@ -5,10 +5,16 @@ on:
     - 'apps/web/**'
     pull_request:
       types: [opened, synchronize]
-  workflow_run:
-    workflows: [Run UI Packages]
-    types:
-      - completed
+  workflow_call:
+    input:
+      gref: 
+        type: string
+        required: true
+        description: Git ref
+  # workflow_run:
+  #   workflows: [Run UI Packages]
+  #   types:
+  #     - completed
 jobs:
   console-linux:
     name: Console Linux
@@ -24,6 +30,8 @@ jobs:
         run: echo "Started to deploy WEB!!"
         
       - uses: actions/checkout@v2
+        with:
+          ref:${{ input.gref }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
@@ -32,11 +40,9 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version: 14
 
-      - name: Checkout branch
+      - name: Check branch
         run: |
-          git checkout ${GITHUB_REF##*/}
-          echo ${{ github.event.pull_request.head.ref }}
-          echo ${{ github.ref }}
+          git status
 
       - name: Install dependencies
         run: cd apps/web && yarn
