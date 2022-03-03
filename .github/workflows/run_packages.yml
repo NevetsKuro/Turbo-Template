@@ -19,6 +19,10 @@ jobs:
         shell: bash
         run: echo "Actions is working A-Okay for PACKAGES/UI!!"
          
-      - uses: ./.gtihub/workflows/run_web.yml
+      - uses: actions/checkout@v2
+
+      - run: git status
+
+      - uses: ./.github/workflows/run_web
         with:
           gref: ${GITHUB_REF##*/}
