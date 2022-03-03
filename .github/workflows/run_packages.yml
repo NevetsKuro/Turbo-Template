@@ -25,6 +25,6 @@ jobs:
 
       - run: git status
 
-      - uses: .github/workflows/run_web
+      - uses: NevetsKuro/Turbo-Template/.github/workflows/run_web
         with:
           gref: ${GITHUB_REF##*/}
