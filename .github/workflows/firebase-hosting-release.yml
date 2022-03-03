@@ -5,10 +5,25 @@ name: Deploy to Firebase Hosting on merge
 'on':
   push:
     branches:
-      - main
+      - 'releases-firebase/**'
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Run build
+        run: echo "Build Executed!"
+        
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Run build
+        run: echo "Lint Executed!"
+
   build_and_deploy:
-    if: ${{ false }} # temporarily pause workflow
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
