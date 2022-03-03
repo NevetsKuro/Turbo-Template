@@ -1,4 +1,4 @@
-name: "Run Apps - Web"
+name: "Run & Deply All Apps"
 on:
   push:
     paths:
@@ -37,14 +37,16 @@ jobs:
 
       - run: yarn turbo run build --scope="web"
 
-      - run: yarn turbo run build --scope="docs"
+      # - run: yarn turbo run build --scope="docs"
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
           projectId: drip-projects
-          channelId: live
+          target: turbo-web
+          expires: 1d
+          channelId: 
 
   # console-windows:
   #   name: Console Windows
