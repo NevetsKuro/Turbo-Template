@@ -3,7 +3,7 @@ on:
   push:
     paths:
     - 'apps/docs/**'
-    - 'packages/ui/**'
+    # - 'packages/ui/**'
     pull_request:
       types: [opened, synchronize]
   # workflow_run:

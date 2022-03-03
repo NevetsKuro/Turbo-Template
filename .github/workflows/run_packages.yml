@@ -61,7 +61,9 @@ jobs:
 
       - run: yarn turbo run build --scope="docs"
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Hosting using firebase
+        id: firebase_docs
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
@@ -69,6 +71,13 @@ jobs:
           target: turbo-docs
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+      
+      - name: Comment
+        if: steps.find-last-comment.outputs.comment-id == ''
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{github.event.pull_request.number}}
+          body: "Firebase pushed to url: ${{steps.firebase_docs.outputs.details_url}}"
 
   console-build-web:
     name: Running Web app
