@@ -20,9 +20,11 @@ jobs:
         run: echo "Actions is working A-Okay for PACKAGES/UI!!"
          
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
       - run: git status
 
-      - uses: ./.github/workflows/run_web
+      - uses: .github/workflows/run_web.yml@main
         with:
           gref: ${GITHUB_REF##*/}
