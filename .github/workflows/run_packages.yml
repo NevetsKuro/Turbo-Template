@@ -24,7 +24,3 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
       - run: git status
-
-      - uses: NevetsKuro/Turbo-Template/.github/workflows/run_web
-        with:
-          gref: ${GITHUB_REF##*/}
