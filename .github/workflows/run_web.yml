@@ -32,6 +32,12 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version: 14
 
+      - name: Checkout branch
+        run: |
+          git checkout ${GITHUB_REF##*/}
+          echo ${{ github.event.pull_request.head.ref }}
+          echo ${{ github.ref }}
+
       - name: Install dependencies
         run: cd apps/web && yarn
 
@@ -46,7 +52,7 @@ jobs:
           projectId: drip-projects
           target: turbo-web
           expires: 1d
-          channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+          channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
 
   # console-windows:
   #   name: Console Windows

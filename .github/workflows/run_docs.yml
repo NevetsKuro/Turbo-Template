@@ -22,6 +22,32 @@ jobs:
         shell: bash
         run: echo "Actions is working A-Okay for DOCS!!"
 
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version: 14
+
+      - name: Checkout branch
+        run: |
+          git checkout ${GITHUB_REF##*/}
+          echo "${{ github.event.pull_request.head.ref }}"
+          echo "${{ github.ref }}"
+
+      - name: Install dependencies
+        run: cd apps/web && yarn
+
+      - run: yarn turbo run build --scope="docs"
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
+          projectId: drip-projects
+          target: turbo-docs
+          expires: 1d
+          channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
   # console-windows:
   #   name: Console Windows
   #   timeout-minutes: 8
