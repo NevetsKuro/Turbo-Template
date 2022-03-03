@@ -1,4 +1,4 @@
-name: "Run & Deply All Apps"
+name: "Run & Deploy Web App"
 on:
   push:
     paths:
@@ -46,7 +46,7 @@ jobs:
           projectId: drip-projects
           target: turbo-web
           expires: 1d
-          channelId: 
+          channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
 
   # console-windows:
   #   name: Console Windows
