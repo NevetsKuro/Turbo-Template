@@ -1,14 +1,15 @@
-name: "Run Apps - Docs"
+name: "Run & Deploy - Docs Apps"
 on:
   push:
     paths:
     - 'apps/docs/**'
+    - 'packages/ui/**'
     pull_request:
       types: [opened, synchronize]
-  workflow_run:
-    workflows: [Run UI Packages]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: [Run UI Packages]
+  #   types:
+  #     - completed
 
 jobs:
   console-linux:
@@ -17,7 +18,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
     steps:
       - name: Run echo command
         shell: bash
