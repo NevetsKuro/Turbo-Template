@@ -5,7 +5,9 @@ export const Button = () => {
   return (
     <div>
       <button onClick={() => {setCount(count+1);setMsg("> One Deluxe Burger")}}>Purchase one burgers boii s🤤</button>
-      {count>0 && <h1>{msg} x{count}</h1>}
+      <br/>
+      <br/>
+      Burgers Purchased: {count>0 && `${count} Qty.`}
     </div>
   );
 };
