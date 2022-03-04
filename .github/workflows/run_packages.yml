@@ -70,35 +70,20 @@ jobs:
           target: turbo-docs
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
-      
-      - name: Run echo command
-        shell: bash
-        run: echo "Deployed! URL ${{steps.firebase_docs.outputs.details_url}}"
 
       - name: Run echo command
         shell: bash
         run: | 
-          echo "Outputs ${{github.event.number}}"
-          echo "Outputs ${{github.event_name}}"
+          echo "Context ${{github.context}}"
+          echo "Number ${{github.event.number}}"
+          echo "Event name ${{github.event_name}}"
 
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          message: 'Example of message !'
+          message: '👋 Deployed Docs App! URL: ${{steps.firebase_docs.outputs.details_url}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-      - name: Comment URL
-        uses: actions/github-script@v6
-        if: ${{ github.context.issue.number != ''}}
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: github.context.issue.number,
-              owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
-              body: '👋 Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}'
-            })  
 
   console-build-web:
     name: Running Web app
@@ -136,7 +121,9 @@ jobs:
 
       - run: yarn turbo run build --scope="web"
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Hosting using firebase
+        id: firebase_webs
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
@@ -144,3 +131,17 @@ jobs:
           target: turbo-web
           expires: 1d
           channelId: 'preview-web-${{ github.event.number }}-${{ github.head_ref }}'
+
+      - name: Run echo command
+        shell: bash
+        run: | 
+          echo "Context ${{github.context}}"
+          echo "Number ${{github.event.number}}"
+          echo "Event name ${{github.event_name}}"
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          message: '👋 Deployed Web App! URL: ${{steps.firebase_webs.outputs.details_url}}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
