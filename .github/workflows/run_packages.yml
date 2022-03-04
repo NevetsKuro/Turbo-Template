@@ -71,10 +71,23 @@ jobs:
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
       
-      - run: 'Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}'
+      - name: Run echo command
+        shell: bash
+        run: echo "Deployed! URL ${{steps.firebase_docs.outputs.details_url}}"
 
-      - run: 'Outputs: ${{github.event.number}}'
+      - name: Run echo command
+        shell: bash
+        run: | 
+          echo "Outputs ${{github.event.number}}"
+          echo "Outputs ${{github.event_name}}"
 
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          message: 'Example of message !'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
       - name: Comment URL
         uses: actions/github-script@v6
         if: ${{ github.context.issue.number != ''}}
