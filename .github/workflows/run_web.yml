@@ -1,11 +1,9 @@
 name: "Run & Deploy - Web App"
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
     paths:
     - 'apps/web/**'
-    # - 'packages/ui/**'
-    pull_request:
-      types: [opened, synchronize]
   # workflow_run:
   #   workflows: [Run UI Packages]
   #   types:

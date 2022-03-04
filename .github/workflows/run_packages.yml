@@ -1,10 +1,9 @@
 name: "Run UI Packages"
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
     paths:
     - 'packages/ui/**'
-    pull_request:
-      types: [opened, synchronize]
 jobs:
   console-ui-packages:
     name: Running UI Packages

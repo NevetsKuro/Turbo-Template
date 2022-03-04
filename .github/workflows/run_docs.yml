@@ -1,11 +1,9 @@
 name: "Run & Deploy - Docs Apps"
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
     paths:
     - 'apps/docs/**'
-    # - 'packages/ui/**'
-    pull_request:
-      types: [opened, synchronize]
   # workflow_run:
   #   workflows: [Run UI Packages]
   #   types:
