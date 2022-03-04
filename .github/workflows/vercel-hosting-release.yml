@@ -1,7 +1,8 @@
 name: Deploy on Vercel
 on:
   push:
-    - 'releases-vercel/**'
+    branches:
+      - 'releases-vercel/**'
 
 jobs:
   build:

@@ -72,16 +72,26 @@ jobs:
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
       
+      - run: 'Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}'
+
+      - run: 'Outputs: ${{github.event.number}}'
+
+      - run: 'Outputs: ${{github.event.pull_request}}'
+
+      - shell: bash
+        run: 'node -p 'console.log(${{ github.context }})'
+
       - name: Comment URL
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
+        if: ${{ context.issue.number != ''}}
         with:
           script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}',
-            });  
+            github.rest.issues.createComment({
+              issue_number: github.context.issue.number,
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
+              body: '👋 Deployed! URL: ${{steps.firebase_docs.outputs.details_url}}'
+            })  
 
   console-build-web:
     name: Running Web app
