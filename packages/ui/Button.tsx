@@ -4,7 +4,7 @@ export const Button = () => {
   const [count, setCount] = React.useState(0);
   return (
     <div>
-      <button onClick={() => {setCount(count+1);setMsg("> Burgers!!")}}>Purchase one burger 🤤</button>
+      <button onClick={() => {setCount(count+1);setMsg("> One Deluxe Burger")}}>Purchase one burgers boii s🤤</button>
       {count>0 && <h1>{msg} x{count}</h1>}
     </div>
   );

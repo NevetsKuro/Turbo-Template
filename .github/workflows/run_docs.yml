@@ -45,14 +45,22 @@ jobs:
 
       - run: yarn turbo run build --scope="docs"
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - id: firebase_docs
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
           projectId: drip-projects
           target: turbo-docs
           expires: 1d
-          channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+          channelId: 'preview-doc-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          message: '👋 Deployed Docs App! URL: ${{steps.firebase_docs.outputs.details_url}}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # console-windows:
   #   name: Console Windows
