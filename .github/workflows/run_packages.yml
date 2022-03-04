@@ -75,11 +75,6 @@ jobs:
 
       - run: 'Outputs: ${{github.event.number}}'
 
-      - run: 'Outputs: ${{github.event.pull_request}}'
-
-      - shell: bash
-        run: 'node -p 'console.log(${{ github.context }})'
-
       - name: Comment URL
         uses: actions/github-script@v6
         if: ${{ context.issue.number != ''}}
