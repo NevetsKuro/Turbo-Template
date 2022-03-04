@@ -6,6 +6,8 @@ export default function Web() {
       {/* Trigger GA - flip value: true */}
       <h1>Ordering System:</h1>
       <p>Place your order below</p>
+      <br/>
+      <br/>
       <Button />
     </div>
   );
