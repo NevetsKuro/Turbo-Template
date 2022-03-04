@@ -77,7 +77,7 @@ jobs:
 
       - name: Comment URL
         uses: actions/github-script@v6
-        if: ${{ context.issue.number != ''}}
+        if: ${{ github.context.issue.number != ''}}
         with:
           script: |
             github.rest.issues.createComment({
