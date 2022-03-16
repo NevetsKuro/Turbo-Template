@@ -24,7 +24,6 @@ export default function Web() {
         'sausage',
         'pork',
         'onions',
-        '',
       ],
       price: '400',
     },
@@ -97,18 +96,20 @@ export default function Web() {
           {orders.length > 0 &&
             orders.map((order, index) => (
               <div key={index} className='display-orders'>
-                <div>
+                <div style={{width:'60%'}}>
                   {order.name}
-                  <br /> <em>price: {order.price}</em>
                 </div>
-                <div>{order.quantity}</div>
+                <div>
+                  {order.quantity} Qty.
+                </div>
+                <div>${order.price}</div>
               </div>
             ))}
           <Divider color='white' bgColor='azure' />
           <div className='display-orders'>
             <br />
             <div>Total:</div>
-            <div>{getTotal(orders)}</div>
+            <div>${getTotal(orders)}</div>
           </div>
         </div>
       </div>
