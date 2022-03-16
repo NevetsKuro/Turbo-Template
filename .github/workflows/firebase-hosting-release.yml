@@ -6,6 +6,11 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - 'releases-firebase/**'
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Reason to run workflow'
+        required: true 
 jobs:
   build:
     runs-on: ubuntu-latest

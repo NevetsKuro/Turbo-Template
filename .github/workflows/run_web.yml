@@ -4,25 +4,13 @@ on:
     types: [opened, synchronize]
     paths:
     - 'apps/web/**'
-  # workflow_run:
-  #   workflows: [Run UI Packages]
-  #   types:
-  #     - completed
 
 jobs:
-  console-linux:
-    name: Console Linux
+  build-run-web:
+    name: Run Web App on linux system
     timeout-minutes: 8
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        # os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
-      - name: Run echo command
-        shell: bash
-        run: echo "Started to deploy WEB!!"
-        
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -34,15 +22,10 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version: 14
 
-      - name: Check branch
-        run: git status
-
       - name: Install dependencies
         run: cd apps/web && yarn
 
       - run: yarn turbo run build --scope="web"
-
-      # - run: yarn turbo run build --scope="docs"
 
       - id: firebase_webs
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -60,15 +43,3 @@ jobs:
         with:
           message: '👋 Deployed Web App! URL: ${{steps.firebase_webs.outputs.details_url}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # console-windows:
-  #   name: Console Windows
-  #   timeout-minutes: 8
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: []
-  #   steps:
-  #     - name: Run echo command
-  #       shell: bash
-  #       run: echo "Actions is working A-Okay for WEB!!"

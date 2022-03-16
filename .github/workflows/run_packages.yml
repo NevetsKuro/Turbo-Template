@@ -4,19 +4,20 @@ on:
     types: [opened, synchronize]
     paths:
     - 'packages/ui/**'
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Reason to run workflow'
+        required: true 
 jobs:
   console-ui-packages:
     name: Running UI Packages
     timeout-minutes: 8
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Run echo command
         shell: bash
-        run: echo "Actions is working A-Okay for PACKAGES/UI!!"
+        run: echo "Actions is running for PACKAGES/UI!!"
          
       - uses: actions/checkout@v2
         with:
@@ -28,16 +29,8 @@ jobs:
     name: Running Docs App
     needs: console-ui-packages
     timeout-minutes: 8
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
-      - name: Run echo command
-        shell: bash
-        run: echo "Actions is working A-Okay for DOCS!!"
-
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -48,12 +41,6 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
           node-version: 14
-
-      - name: Checkout branch
-        run: |
-          git status
-          echo "${{ github.event.pull_request }}"
-          echo "${{ github.ref }}"
 
       - name: Install dependencies
         run: cd apps/docs && yarn
@@ -71,13 +58,6 @@ jobs:
           expires: 1d
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
 
-      - name: Run echo command
-        shell: bash
-        run: | 
-          echo "Context ${{github.context}}"
-          echo "Number ${{github.event.number}}"
-          echo "Event name ${{github.event_name}}"
-
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
         if: ${{ github.event_name == 'pull_request' }}
@@ -89,16 +69,8 @@ jobs:
     name: Running Web app
     needs: console-ui-packages
     timeout-minutes: 8
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
-      - name: Run echo command
-        shell: bash
-        run: echo "Actions is working A-Okay for WEB!!"
-
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
@@ -109,12 +81,6 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
           node-version: 14
-
-      - name: Checkout branch
-        run: |
-          git status
-          echo "${{ github.event.pull_request }}"
-          echo "${{ github.ref }}"
 
       - name: Install dependencies
         run: cd apps/web && yarn
@@ -131,13 +97,6 @@ jobs:
           target: turbo-web
           expires: 1d
           channelId: 'preview-web-${{ github.event.number }}-${{ github.head_ref }}'
-
-      - name: Run echo command
-        shell: bash
-        run: | 
-          echo "Context ${{github.context}}"
-          echo "Number ${{github.event.number}}"
-          echo "Event name ${{github.event_name}}"
 
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
