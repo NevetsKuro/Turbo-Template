@@ -20,6 +20,11 @@ export default function Web() {
       ingredients: ['chicken', 'cheese', 'salami', 'sausage', 'pork', 'onions'],
       price: '400',
     },
+    {
+      name: 'COKE',
+      ingredients: [],
+      price: '100',
+    },
   ];
   const buyPizza = (prevOrders, pizza) => {
     console.log('new Orders', pizza);
