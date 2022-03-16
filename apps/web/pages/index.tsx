@@ -17,14 +17,7 @@ export default function Web() {
     },
     {
       name: 'MEAT EATER',
-      ingredients: [
-        'chicken',
-        'cheese',
-        'salami',
-        'sausage',
-        'pork',
-        'onions',
-      ],
+      ingredients: ['chicken', 'cheese', 'salami', 'sausage', 'pork', 'onions'],
       price: '400',
     },
   ];
@@ -58,58 +51,76 @@ export default function Web() {
     });
     return totalCost;
   };
+  const resetOrder = () => {
+    setOrders([]);
+  };
+  const submitOrder = () => {
+    alert('Order placed!!');
+  };
   return (
     <div className='container'>
       <h1>Pizza Ordering System:</h1>
-      <br />
-      <em>Place your order below from the below menu</em>
-      <table className='menu-table'>
-        <tbody>
-          {menu.map((pizza, index) => {
-            return (
-              <tr key={index}>
-                <td>
-                  {pizza.name}
-                  <br />
-                  {pizza.ingredients.map((ingredient) => (
-                    <div key={ingredient} className='chips'>
-                      {ingredient}
-                    </div>
-                  ))}
-                </td>
-                <td>
-                  <Button
-                    title={'Buy'}
-                    callbackFn={() => buyPizza(orders, pizza)}
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div>
-        <h2>
-          Orders: (<i>Items: {count || 0}</i>)
-        </h2>
-        <div className='orders'>
-          {orders.length > 0 &&
-            orders.map((order, index) => (
-              <div key={index} className='display-orders'>
-                <div style={{width:'60%'}}>
-                  {order.name}
+
+      <div className='system-container'>
+        <table className='menu-table'>
+          <h4>Menu</h4>
+          <tbody>
+            {menu.map((pizza, index) => {
+              return (
+                <>
+                  <tr key={index}>
+                    <td>
+                      {pizza.name}
+                      <br />
+                      {pizza.ingredients.map((ingredient) => (
+                        <div key={ingredient} className='chips'>
+                          {ingredient}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      <Button
+                        title={'+'}
+                        callbackFn={() => buyPizza(orders, pizza)}
+                      />
+                    </td>
+                  </tr>
+                  {menu.length - 1 != index && (
+                    <tr>
+                      <td colSpan={2}>
+                        <Divider color='white' bgColor='azure' />
+                      </td>
+                    </tr>
+                  )}
+                </>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className='orders-table'>
+          <h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;Orders: (<i>Items: {count || 0}</i>)
+          </h4>
+          <div className='orders'>
+            {orders.length > 0 ?
+              orders.map((order, index) => (
+                <div key={index} className='display-orders'>
+                  <div style={{ width: '60%' }}>{order.name}</div>
+                  <div>{order.quantity} Qty.</div>
+                  <div>${order.price}</div>
                 </div>
-                <div>
-                  {order.quantity} Qty.
-                </div>
-                <div>${order.price}</div>
-              </div>
-            ))}
-          <Divider color='white' bgColor='azure' />
+              )):
+              <p className='display-orders'>Hungry? Have some pizza!.</p>}
+            <Divider color='white' bgColor='azure' />
+            <div className='display-orders'>
+              <br />
+              <div>Total:</div>
+              <div>${getTotal(orders)}</div>
+            </div>
+          </div>
           <div className='display-orders'>
-            <br />
-            <div>Total:</div>
-            <div>${getTotal(orders)}</div>
+            <Button title='Reset' callbackFn={() => resetOrder()} />
+            <Button title='Submit' callbackFn={() => submitOrder()} />
           </div>
         </div>
       </div>
