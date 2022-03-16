@@ -46,3 +46,4 @@ jobs:
         with:
           message: '👋 Deployed Web App! URL: ${{steps.firebase_webs.outputs.details_url}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
