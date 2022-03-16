@@ -33,10 +33,13 @@
 
 
 /* Ordered Items displayed */
+.orders {
+  width: 400px;
+}
 .display-orders {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  width: 100%;
   justify-content: space-between;
   align-items: baseline;
   background: azure;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'ui';
+import { Button, Divider } from 'ui';
 
 export default function Web() {
   const [orders, setOrders] = useState([]);
@@ -30,10 +30,10 @@ export default function Web() {
     },
   ];
   const buyPizza = (prevOrders, pizza) => {
-    console.log("new Orders", pizza);
+    console.log('new Orders', pizza);
     let temp = prevOrders || [];
     const flag = temp.some((x) => x.name == pizza.name);
-    setCount(count+1)
+    setCount(count + 1);
     if (!flag) {
       console.log('New pizza');
       temp.push({
@@ -53,12 +53,12 @@ export default function Web() {
     console.log(temp);
   };
   const getTotal = (preOrders) => {
-    let totalCost = 0
-    preOrders.forEach(order=>{
-      totalCost += order.quantity * order.price
-    })
-    return totalCost
-  }
+    let totalCost = 0;
+    preOrders.forEach((order) => {
+      totalCost += order.quantity * order.price;
+    });
+    return totalCost;
+  };
   return (
     <div className='container'>
       <h1>Pizza Ordering System:</h1>
@@ -79,7 +79,10 @@ export default function Web() {
                   ))}
                 </td>
                 <td>
-                  <Button title={'Buy'} callbackFn={() => buyPizza(orders, pizza)} />
+                  <Button
+                    title={'Buy'}
+                    callbackFn={() => buyPizza(orders, pizza)}
+                  />
                 </td>
               </tr>
             );
@@ -87,18 +90,23 @@ export default function Web() {
         </tbody>
       </table>
       <div>
-        <h2>Orders: (<i>Items: {count || 0}</i>)</h2>
-        <div>
-          {orders.length > 0 && orders.map((order, index) => (
-            <div key={index} className="display-orders">
-              <div>
-                {order.name}
-                <br /> <em>price: {order.price}</em>
+        <h2>
+          Orders: (<i>Items: {count || 0}</i>)
+        </h2>
+        <div className='orders'>
+          {orders.length > 0 &&
+            orders.map((order, index) => (
+              <div key={index} className='display-orders'>
+                <div>
+                  {order.name}
+                  <br /> <em>price: {order.price}</em>
+                </div>
+                <div>{order.quantity}</div>
               </div>
-              <div>{order.quantity}</div>
-            </div>
-          ))}
+            ))}
+          <Divider color='white' bgColor='azure' />
           <div className='display-orders'>
+            <br />
             <div>Total:</div>
             <div>{getTotal(orders)}</div>
           </div>
