@@ -43,7 +43,12 @@ jobs:
       - name: Install dependencies of /web folder
         run: cd apps/web && yarn
 
+      - name: Install dependencies of /web folder
+        run: cd apps/docs && yarn
+
       - run: yarn turbo run build --scope="web"
+
+      - run: yarn turbo run build --scope="docs"
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -51,5 +56,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DRIP_PROJECTS }}'
           channelId: live
           projectId: drip-projects
-          target: turbo-docs
           expires: 1d
