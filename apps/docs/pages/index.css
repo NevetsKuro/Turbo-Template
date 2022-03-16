@@ -1,0 +1,14 @@
+.doc-table{
+  align-items: center;
+  width: 80%;
+  padding: 24px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid lightgrey;
+  justify-content: space-evenly;
+  font-size: 32px;
+}
+.doc-table > div {
+  width: 360px;
+}

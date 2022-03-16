@@ -1,11 +1,10 @@
 import * as React from 'react';
-export const Button = () => {
-  const [msg, setMsg] = React.useState('');
-  const [count, setCount] = React.useState(0);
+import "./css/style.css"
+
+export const Button = ({callbackFn, title}:{callbackFn: React.EventHandler<any> ,title: string}) => {
   return (
-    <div>
-      <button onClick={() => {setCount(count+1);setMsg("> One Deluxe Burger")}}>Purchase one burgers boii s🤤</button>
-      {count>0 && <h1>{msg} x{count}</h1>}
-    </div>
+    <button className='primary-button' title={title} onClick={callbackFn}>
+      {title}
+    </button>
   );
 };
