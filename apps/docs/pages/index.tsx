@@ -1,19 +1,19 @@
-import { Button } from 'ui';
+import { Button } from "ui";
 
 export default function Docs() {
-  const dummyFn = () => {console.log("Button clicked!")};
   return (
     <div>
-      <h1>Documentation for predefined Components (v1.0.0)</h1>
-      <br />
-      <div className='doc-table'>
-        <div>
-          <h1>Button v1</h1>
-        </div>
-        <div>
-          <Button title='Title here' callbackFn={() => dummyFn()} />
-        </div>
-      </div>
+      {/* Trigger GA - flip value: true */}
+      <h1>Turbo Docs </h1>
+      <br/>
+      <table style={{ width:'100%' }}>
+        <tr>
+          <td>Button</td>
+          <td>
+            <Button />
+          </td>
+        </tr>
+      </table>
     </div>
   );
 }
