@@ -28,6 +28,7 @@ jobs:
       - run: yarn turbo run build --scope="docs"
 
       - id: firebase_docs
+        if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -39,7 +40,7 @@ jobs:
 
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
         with:
           message: '👋 Deployed Docs App! URL: ${{steps.firebase_docs.outputs.details_url}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

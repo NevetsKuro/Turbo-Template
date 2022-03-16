@@ -28,6 +28,7 @@ jobs:
       - run: yarn turbo run build --scope="web"
 
       - id: firebase_webs
+        if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -38,8 +39,8 @@ jobs:
           channelId: 'preview-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
 
       - name: Comment PR
+        if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
         uses: thollander/actions-comment-pull-request@v1
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           message: '👋 Deployed Web App! URL: ${{steps.firebase_webs.outputs.details_url}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

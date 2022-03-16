@@ -32,6 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version: 14
+      - name: Install dependencies of /web folder
+        run: cd apps/web && yarn
       - run: yarn turbo run build --scope="web"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
