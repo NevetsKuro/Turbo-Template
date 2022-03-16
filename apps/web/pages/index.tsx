@@ -21,9 +21,9 @@ export default function Web() {
       price: '400',
     },
     {
-      name: 'COKE',
-      ingredients: [],
-      price: '100',
+      name: 'WINGS',
+      ingredients: ['mexican spice', 'chicken'],
+      price: '120',
     },
   ];
   const buyPizza = (prevOrders, pizza) => {
