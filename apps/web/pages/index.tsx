@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { useState } from 'react';
 import { Button, Divider } from 'ui';
 
@@ -60,10 +61,13 @@ export default function Web() {
     setOrders([]);
   };
   const submitOrder = () => {
-    alert('Order placed!!');
+    alert('Order placed!! \n Bill Amount: $' + getTotal(orders));
   };
   return (
     <div className='container'>
+      <Head>
+        <title>Web: Ordering System</title>
+      </Head>
       <h1>Pizza Ordering System:</h1>
 
       <div className='system-container'>
@@ -72,8 +76,8 @@ export default function Web() {
           <tbody>
             {menu.map((pizza, index) => {
               return (
-                <>
-                  <tr key={index}>
+                <React.Fragment key={index}>
+                  <tr>
                     <td>
                       {pizza.name}
                       <br />
@@ -97,7 +101,7 @@ export default function Web() {
                       </td>
                     </tr>
                   )}
-                </>
+                </React.Fragment>
               );
             })}
           </tbody>
@@ -129,6 +133,7 @@ export default function Web() {
           </div>
         </div>
       </div>
+      <p>{process.env.NEXT_PUBLIC_MESSAGE}</p>
     </div>
   );
 }
