@@ -69,3 +69,7 @@ jobs:
           projectId: drip-projects
           target: turbo-docs
           expires: 1d
+
+      - name: Display live URLs
+        shell: bash
+        run: echo '${{steps.firebase_webs.outputs.details_url}}'
