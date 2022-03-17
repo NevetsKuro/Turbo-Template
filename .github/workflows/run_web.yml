@@ -4,10 +4,10 @@ on:
     types: [opened, synchronize]
     paths:
     - 'apps/web/**'
-  pull_request_review:
-    types: [submitted]
-    paths:
-    - 'apps/web/**'
+  # pull_request_review:
+  #   types: [submitted]
+  #   paths:
+  #   - 'apps/web/**'
 
 jobs:
   build-run-web:
