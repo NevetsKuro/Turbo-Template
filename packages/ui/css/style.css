@@ -8,11 +8,11 @@
 .primary-button{
   cursor: pointer;
   color: midnightblue;
-  padding: 12px 40px;
+  padding: 12px 36px;
   border-radius: 12px;
   border: none;
   font-family: monospace;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
 }
 .divider{
