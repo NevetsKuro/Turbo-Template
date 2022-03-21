@@ -1,6 +1,15 @@
 *{
   box-sizing: border-box;
 }
+body{
+  margin: 0px;
+}
+.underline{
+  text-decoration: underline;
+}
+.text-center{
+  text-align: center;
+}
 .container{ 
   width: 80%;
   margin: auto;
@@ -12,26 +21,37 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.system-container > div:nth-child(1) {
+  width: 60%;
+}
+.system-container > div:nth-child(2) {
+  width: 30%;
+  margin: 64px auto;
+}
 .orders-table{
-  margin: 12px 0;
-  padding: 16px 0;
-  border: 2px solid #c4c4c4;
-  background-color: azure;
+  padding: 16px 24px;
+  background-color: #c5daff;
   border-radius: 4px;
+  box-shadow: 1px 2px 13px -7px black;
 }
 .menu-table{
-  margin: 12px 0;
-  border: 2px solid #c4c4c4;
+  width: 100%;
+  height: 100vh;
+  border: none; 
   background: #13448b;
   color: white;
-  padding: 16px;
+  padding: 16px 80px;
   border-radius: 4px;
 }
-.menu-table > tbody > tr > td {
+.menu-table > table{
+  width: 100%;
+  padding: 8px 0;
+}
+.menu-table > table > tbody > tr > td {
   line-height: 2;
   padding-bottom: 16px;
 }
-.menu-table > tbody > tr > td:nth-child(2) {
+.menu-table > table > tbody > tr > td:nth-child(2) {
   width: 0px;
 }
 
@@ -48,7 +68,7 @@
 
 /* Ordered Items displayed */
 .orders {
-  width: 400px;
+  width: auto;
 }
 .display-orders {
   display: flex;
@@ -56,6 +76,5 @@
   width: 100%;
   justify-content: space-between;
   align-items: baseline;
-  background: azure;
   padding: 12px;
 }

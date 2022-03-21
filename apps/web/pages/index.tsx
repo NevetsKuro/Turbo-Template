@@ -64,76 +64,81 @@ export default function Web() {
     alert('Order placed!! \n Bill Amount: $' + getTotal(orders));
   };
   return (
-    <div className='container'>
+    <div>
       <Head>
         <title>Web: Ordering System</title>
       </Head>
-      <h1>Pizza Ordering System:</h1>
-
       <div className='system-container'>
-        <table className='menu-table'>
-          <h4>Menu</h4>
-          <tbody>
-            {menu.map((pizza, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <tr>
-                    <td>
-                      {pizza.name}
-                      <br />
-                      {pizza.ingredients.map((ingredient) => (
-                        <div key={ingredient} className='chips'>
-                          {ingredient}
-                        </div>
-                      ))}
-                    </td>
-                    <td>
-                      <Button
-                        title={'+'}
-                        callbackFn={() => buyPizza(orders, pizza)}
-                      />
-                    </td>
-                  </tr>
-                  {menu.length - 1 != index && (
+        <div className='menu-table'>
+          <h1 className='text-center'>Pizza Ordering System</h1>
+          <br/>
+          <h3 className='underline'> Order from Menu</h3>
+          <table className='borders'>
+            <tbody>
+              {menu.map((pizza, index) => {
+                return (
+                  <React.Fragment key={index}>
                     <tr>
-                      <td colSpan={2}>
-                        <Divider color='white' bgColor='azure' />
+                      <td>
+                        {pizza.name}
+                        <br />
+                        {pizza.ingredients.map((ingredient) => (
+                          <div key={ingredient} className='chips'>
+                            {ingredient}
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        <Button
+                          title={'+'}
+                          callbackFn={() => buyPizza(orders, pizza)}
+                        />
                       </td>
                     </tr>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </tbody>
-        </table>
-        <div className='orders-table'>
-          <h4>
-            &nbsp;&nbsp;&nbsp;&nbsp;Orders: (<i>Items: {count || 0}</i>)
-          </h4>
-          <div className='orders'>
-            {orders.length > 0 ?
-              orders.map((order, index) => (
-                <div key={index} className='display-orders'>
-                  <div style={{ width: '60%' }}>{order.name}</div>
-                  <div>{order.quantity} Qty.</div>
-                  <div>${order.price}</div>
-                </div>
-              )):
-              <p className='display-orders'>Hungry? Have some pizza!.</p>}
-            <Divider color='white' bgColor='azure' />
+                    {menu.length - 1 != index && (
+                      <tr>
+                        <td colSpan={2}>
+                          <Divider color='white' bgColor='azure' />
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div className='w-1/2'>
+          <div className='orders-table'>
+            <h3>
+              &nbsp;&nbsp;&nbsp;&nbsp;Orders: (<i>Items: {count || 0}</i>)
+            </h3>
+            <div className='orders'>
+              {orders.length > 0 ? (
+                orders.map((order, index) => (
+                  <div key={index} className='display-orders'>
+                    <div style={{ width: '60%' }}>{order.name}</div>
+                    <div>{order.quantity} Qty.</div>
+                    <div>${order.price}</div>
+                  </div>
+                ))
+              ) : (
+                <p className='display-orders'>Hungry? Add some pizza to your tummy!.</p>
+              )}
+              <Divider color='white' bgColor='azure' />
+              <div className='display-orders'>
+                <br />
+                <div>Total: ${getTotal(orders)}</div>
+              </div>
+            </div>
             <div className='display-orders'>
-              <br />
-              <div>Total:</div>
-              <div>${getTotal(orders)}</div>
+              <Button title='Reset' callbackFn={() => resetOrder()} />
+              <Button title='Submit' callbackFn={() => submitOrder()} />
             </div>
           </div>
-          <div className='display-orders'>
-            <Button title='Reset' callbackFn={() => resetOrder()} />
-            <Button title='Submit' callbackFn={() => submitOrder()} />
-          </div>
+          <p>{process.env.NEXT_PUBLIC_MESSAGE}</p>
         </div>
       </div>
-      <p>{process.env.NEXT_PUBLIC_MESSAGE}</p>
     </div>
   );
 }
