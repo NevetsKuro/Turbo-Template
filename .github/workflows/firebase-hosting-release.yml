@@ -72,4 +72,6 @@ jobs:
 
       - name: Display live URLs
         shell: bash
-        run: echo '${{steps.firebase_webs.outputs.details_url}}'
+        run: |
+          echo "Web: ${{steps.firebase_webs.outputs.details_url}}"
+          echo "Docs: ${{steps.firebase_docs.outputs.details_url}}"
