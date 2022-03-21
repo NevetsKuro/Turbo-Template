@@ -8,6 +8,7 @@
 .primary-button{
   cursor: pointer;
   color: midnightblue;
+  background-color: #efefef;
   padding: 12px 36px;
   border-radius: 12px;
   border: none;
@@ -15,8 +16,12 @@
   font-size: 24px;
   font-weight: 600;
 }
+.primary-button:hover{
+  filter: brightness(0.9);
+}
 .divider{
   color: grey;
-  width: 400px;
-  margin: 0px auto;
+  width: 80%;
+  margin-left: 0px;
+  height: 2px;
 }
