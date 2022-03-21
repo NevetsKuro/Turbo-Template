@@ -22,7 +22,7 @@ export default function Web() {
       price: '400',
     },
     {
-      name: 'WINGS',
+      name: 'HOT WINGS',
       ingredients: ['mexican spice', 'chicken'],
       price: '120',
     },
