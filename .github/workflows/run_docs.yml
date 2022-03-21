@@ -4,8 +4,10 @@ on:
     types: [opened, synchronize]
     paths:
     - 'apps/docs/**'
-  # pull_request_review:
-  #   types: [submitted]
+  pull_request_review:
+    types: [submitted]
+    paths:
+    - 'apps/web/**'
 
 jobs:
   build-run-docs:
@@ -30,7 +32,7 @@ jobs:
       - run: yarn turbo run build --scope="docs"
 
       - id: firebase_docs
-        # if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
+        if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
