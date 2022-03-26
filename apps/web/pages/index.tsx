@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { Button, Divider } from 'ui';
+import { Button, Chips, Divider, Heading } from 'ui';
 
 export default function Web() {
   const [orders, setOrders] = useState([]);
@@ -70,8 +70,8 @@ export default function Web() {
       </Head>
       <div className='system-container'>
         <div className='menu-table'>
-          <h1 className='text-center'>Pizza Ordering System</h1>
-          <br/>
+          <Heading title={'Pizza Ordering System'} />
+          <br />
           <h3 className='underline'> Order from Menu</h3>
           <table className='borders'>
             <tbody>
@@ -83,14 +83,14 @@ export default function Web() {
                         {pizza.name}
                         <br />
                         {pizza.ingredients.map((ingredient) => (
-                          <div key={ingredient} className='chips'>
-                            {ingredient}
-                          </div>
+                          <Chips key={ingredient} ingredient={ingredient} />
                         ))}
                       </td>
                       <td>
                         <Button
                           title={'+'}
+                          color='midnightblue'
+                          bgColor='efefef'
                           callbackFn={() => buyPizza(orders, pizza)}
                         />
                       </td>
@@ -123,7 +123,9 @@ export default function Web() {
                   </div>
                 ))
               ) : (
-                <p className='display-orders'>Hungry? Add some pizza to your tummy!.</p>
+                <p className='display-orders'>
+                  Hungry? Add some pizza to your tummy!.
+                </p>
               )}
               <Divider color='white' bgColor='azure' />
               <div className='display-orders'>
@@ -132,8 +134,18 @@ export default function Web() {
               </div>
             </div>
             <div className='display-orders'>
-              <Button title='Reset' callbackFn={() => resetOrder()} />
-              <Button title='Submit' callbackFn={() => submitOrder()} />
+              <Button
+                title='Reset'
+                color='midnightblue'
+                bgColor='efefef'
+                callbackFn={() => resetOrder()}
+              />
+              <Button
+                title='Submit'
+                color='midnightblue'
+                bgColor='efefef'
+                callbackFn={() => submitOrder()}
+              />
             </div>
           </div>
           <p>{process.env.NEXT_PUBLIC_MESSAGE}</p>

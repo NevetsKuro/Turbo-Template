@@ -25,3 +25,16 @@
   margin-left: 0px;
   height: 2px;
 }
+.heading{
+  font-size: 24px;
+  margin: 16px auto;
+}
+.chips{
+  display: inline;
+  margin-right: 4px;
+  border-radius: 16px;
+  padding: 1px 7px;
+  background: white;
+  color: #17367a;
+  font-size: 13px;
+}

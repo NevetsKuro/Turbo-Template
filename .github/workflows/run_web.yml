@@ -4,11 +4,12 @@ on:
     types: [opened, synchronize]
     paths:
     - 'apps/web/**'
-  pull_request_review:
-    types: [submitted]
-    paths:
-    - 'apps/web/**'
-
+  # doesnt work with paths
+  # pull_request_review:
+  #   types: [submitted]
+  #   paths:
+  #   - 'apps/web/**'
+ 
 jobs:
   build-run-web:
     name: Run Web App on linux system

@@ -55,16 +55,6 @@ body{
   width: 0px;
 }
 
-.chips{
-  display: inline;
-  margin-right: 4px;
-  border-radius: 16px;
-  padding: 1px 7px;
-  background: white;
-  color: #17367a;
-  font-size: 13px;
-}
-
 
 /* Ordered Items displayed */
 .orders {
